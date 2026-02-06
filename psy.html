@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>please say yes</title>
+
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: #ffe6f0;
+      font-family: "Comic Sans MS", cursive;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .container {
+      position: relative;
+      z-index: 5;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      padding: 14px 26px;
+      font-size: 18px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      margin: 0 12px;
+      white-space: nowrap;
+    }
+
+    #yes {
+      background-color: #ff69b4;
+      color: white;
+    }
+
+    #no {
+      background-color: #ddd;
+    }
+
+    #yay {
+      display: none;
+      font-size: 80px;
+      font-weight: bold;
+      color: #e75480;
+      z-index: 5;
+    }
+
+    /* Floating hearts */
+    .heart {
+      position: fixed;
+      bottom: -40px;
+      font-size: 30px;
+      animation: floatUp linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatUp {
+      from {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      to {
+        transform: translateY(-120vh);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container" id="main">
+    <h1>Will you go out with me? 💕</h1>
+    <div id="buttons">
+      <button id="yes">YES 💖</button>
+      <button id="no">NO 🙄</button>
+    </div>
+  </div>
+
+  <div id="yay">YAYYYYYYYY!!!</div>
+
+<script>
+  const yesBtn = document.getElementById("yes");
+  const noBtn = document.getElementById("no");
+  const main = document.getElementById("main");
+  const yay = document.getElementById("yay");
+
+  const noMessages = [
+    "Are you sure?",
+    "Like… really sure?",
+    "That’s kinda mean though 😭",
+    "Please say yes",
+    "I’m gonna cry",
+    "This is making me sad",
+    "One yes won’t hurt",
+    "I’ll be really nice I promise",
+    "You’re breaking my heart",
+    "Okay wow. That hurts."
+  ];
+
+  let noCount = 0;
+
+  noBtn.addEventListener("click", () => {
+    if (noCount < noMessages.length) {
+      noBtn.textContent = noMessages[noCount];
+      noCount++;
+    } else {
+      noBtn.remove();
+    }
+  });
+
+  yesBtn.addEventListener("click", () => {
+    main.remove();
+    yay.style.display = "block";
+    startHearts();
+  });
+
+  function startHearts() {
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "❤️";
+      heart.style.left = Math.random() * 100 + "vw";
+      heart.style.animationDuration = 4 + Math.random() * 4 + "s";
+      document.body.appendChild(heart);
+
+      setTimeout(() => heart.remove(), 8000);
+    }, 300);
+  }
+</script>
+
+</body>
+</html>
+
